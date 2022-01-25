@@ -32,7 +32,7 @@ export const Step2 = () => {
 
     const onSubmit = async data => {
         console.log(data);
-        navigate('/step2');
+        navigate('/step3');
     };
 
     return (
@@ -75,7 +75,6 @@ export const Step2 = () => {
                     type='reset'>Back
                 </MyButton>
             </MyForm>
-            
         </MainContainer>
     )
 };
