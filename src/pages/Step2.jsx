@@ -15,23 +15,30 @@ import { MyForm } from '../components/MyForm'
 import { MyInput } from '../components/MyInput'
 import { MyButton } from '../components/MyButton';
 import { MyCheckbox } from '../components/MyCheckbox';
+//получение данных из контекста
+import { useData } from '../DataContext'
+
+
 
 
 export const Step2 = () => {
+    const { data, setValues } = useData();
     let navigate = useNavigate();
+
     const { register, handleSubmit, watch, formState: { errors } } = useForm({
         mode: 'onBlur',
+        defaultValues: {email: data.email, phoneNumber: data.phoneNumber, havePhone: data.havePhone},
         resolver: yupResolver(schemaStep2)
     });
-    //console.log(watch())
 
     const havePhone = watch('havePhone');
     function changePhone(event) {
         event.target.value = normalizePhoneNumber(event.target.value)
     }
 
-    const onSubmit = async data => {
-        console.log(data);
+    const onSubmit = async (formData) => {
+        //console.log(formData);
+        setValues(formData);
         navigate('/step3');
     };
 
@@ -52,8 +59,12 @@ export const Step2 = () => {
                     helperText={errors?.email?.message}
                 />
                 <FormControlLabel
-                    control={<MyCheckbox {...register("havePhone")} />}
-                    label="Have a phone?" />
+                    control={<MyCheckbox
+                            {...register("havePhone")} />}
+                            label="Have a phone?"
+                            defaultValue={data.havePhone}
+                            defaultChecked={data.havePhone}
+                        />
                 {havePhone &&
                 <MyInput
                     {...register("phoneNumber")}
@@ -72,7 +83,8 @@ export const Step2 = () => {
                 <MyButton
                     onClick={() => navigate('/')}
                     variant="outlined"
-                    type='reset'>Back
+                    //type='reset'
+                >Back
                 </MyButton>
             </MyForm>
         </MainContainer>

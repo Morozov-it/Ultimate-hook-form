@@ -9,17 +9,24 @@ import { MainContainer } from '../components/MainContainer';
 import { MyForm } from '../components/MyForm'
 import { MyButton } from '../components/MyButton';
 import { FileInput } from '../components/FileInput';
+//получение данных из контекста
+import { useData } from '../DataContext'
+
+
 
 
 export const Step3 = () => {
+    const { data, setValues } = useData();
     let navigate = useNavigate();
-    const { control, handleSubmit, watch } = useForm({
-        mode: 'onBlur',
-    });
-    console.log(watch())
 
-    const onSubmit = async data => {
-        console.log(data);
+    const { control, handleSubmit } = useForm({
+        mode: 'onBlur',
+        defaultValues: {file: data.file}
+    });
+
+    const onSubmit = async (formData) => {
+        //console.log(formData);
+        setValues(formData);
         navigate('/result');
     };
 
@@ -38,7 +45,8 @@ export const Step3 = () => {
                 <MyButton
                     onClick={() => navigate('/step2')}
                     variant="outlined"
-                    type='reset'>Back
+                    //type='reset'
+                >Back
                 </MyButton>
             </MyForm>
         </MainContainer>

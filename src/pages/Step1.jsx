@@ -12,19 +12,26 @@ import { MainContainer } from '../components/MainContainer';
 import { MyForm } from '../components/MyForm'
 import { MyInput } from '../components/MyInput'
 import { MyButton } from '../components/MyButton';
+//получение данных из контекста
+import { useData } from '../DataContext'
+
+
 
 
 export const Step1 = () => {
+    const { data, setValues } = useData();
     let navigate = useNavigate();
+
     const { control, register, handleSubmit, } = useForm({
         mode: 'onBlur',
+        defaultValues: {firstName: data.firstName, lastName: data.lastName},
         resolver: yupResolver(schemaStep1)
     });
-    //console.log(watch())
 
     const { errors } = useFormState({ control });
-    const onSubmit = async data => {
-        console.log(data);
+    const onSubmit = async (formData) => {
+        //console.log(formData);
+        setValues(formData)
         navigate('/step2');
     };
 

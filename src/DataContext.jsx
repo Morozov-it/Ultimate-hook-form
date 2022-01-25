@@ -16,7 +16,7 @@ export const DataProvider = ({ children }) => {
     }
 
     return (
-        <DataContext.Provider value={{ data, setValues }}>{ children }</DataContext.Provider>
+        <DataContext.Provider value={{ data, setValues, setData }}>{ children }</DataContext.Provider>
     )
 };
 
