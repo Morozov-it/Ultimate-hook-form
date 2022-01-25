@@ -1,10 +1,12 @@
+//основные
 import React from 'react';
 import { useForm, useFormState } from 'react-hook-form';
+import { useNavigate } from "react-router-dom";
 //файлы библиотек
 import Typography from '@material-ui/core/Typography';
 //пакет для валидации
 import { yupResolver } from '@hookform/resolvers/yup';
-import { schemaStep1 } from '../validation';
+import { schemaStep1 } from '../utils/validation';
 //компоненты
 import { MainContainer } from '../components/MainContainer';
 import { MyForm } from '../components/MyForm'
@@ -13,15 +15,17 @@ import { MyButton } from '../components/MyButton';
 
 
 export const Step1 = () => {
+    let navigate = useNavigate();
     const { control, register, handleSubmit, } = useForm({
         mode: 'onBlur',
         resolver: yupResolver(schemaStep1)
-    })
+    });
     //console.log(watch())
 
-    const { errors } = useFormState({ control })
+    const { errors } = useFormState({ control });
     const onSubmit = async data => {
         console.log(data);
+        navigate('/step2');
     };
 
     return (
