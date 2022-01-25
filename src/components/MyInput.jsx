@@ -9,6 +9,6 @@ export const MyInput = forwardRef((props, ref) => {
         {...props}
         margin='normal'
         fullWidth
-        variant="outlined" />
+        />
 })
 

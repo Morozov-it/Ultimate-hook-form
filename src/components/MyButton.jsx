@@ -11,11 +11,11 @@ const useStyles = makeStyles((theme) => ({
 export const MyButton = ({ children, ...props }) => {
     const styles=useStyles()
     return <Button
+        {...props}
         className={styles.root}
-        type='submit'
         margin='normal'
         fullWidth
         color="primary"
-        variant="contained">{children}</Button>
+        >{children}</Button>
 }
 

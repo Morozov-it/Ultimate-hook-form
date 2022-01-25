@@ -39,6 +39,7 @@ export const Step1 = () => {
                     id='firstName'
                     type='text'
                     label='First Name'
+                    variant="outlined"
                     error={!!errors.firstName}
                     helperText={errors?.firstName?.message}
                 />
@@ -46,10 +47,13 @@ export const Step1 = () => {
                     id='lastName'
                     type='text'
                     label='Last Name'
+                    variant="outlined"
                     error={!!errors.lastName}
                     helperText={errors?.lastName?.message}
                 />
-                <MyButton>Next</MyButton>
+                <MyButton
+                    type='submit'
+                    variant="contained">Next</MyButton>
             </MyForm>
         </MainContainer>
     )

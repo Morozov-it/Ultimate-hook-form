@@ -24,7 +24,7 @@ export const Step2 = () => {
         resolver: yupResolver(schemaStep2)
     });
     //console.log(watch())
-    
+
     const havePhone = watch('havePhone');
     function changePhone(event) {
         event.target.value = normalizePhoneNumber(event.target.value)
@@ -61,9 +61,19 @@ export const Step2 = () => {
                     type='tel'
                     label='Phone number'
                     onChange={changePhone}
+                    variant="standard"
                 />}
-                <MyButton>Next</MyButton>
+                <MyButton
+                    type='submit'
+                    variant="contained">Next
+                </MyButton>
+                <MyButton
+                    onClick={() => navigate('/')}
+                    variant="outlined"
+                    type='reset'>Back
+                </MyButton>
             </MyForm>
+            
         </MainContainer>
     )
 };
