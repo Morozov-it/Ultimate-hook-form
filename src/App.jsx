@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Header } from './components/Header';
 
-const Header = () => (<h1>Header</h1>)
+
 const Step1 = () => (<>Step1</>)
 const Step2 = () => (<>Step2</>)
 const Step3 = () => (<>Step3</>)
