@@ -3,7 +3,7 @@ import { TextField } from '@material-ui/core';
 
 
 //передача реф к дочернему элементу
-export const Input = forwardRef((props, ref) => {
+export const MyInput = forwardRef((props, ref) => {
     return <TextField
         inputRef={ref}
         {...props}

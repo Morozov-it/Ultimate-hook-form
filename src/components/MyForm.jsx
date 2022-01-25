@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //создаем компонент-обертку над формой, передаем все пропсы, атрибут noValidate отключает стандартные функции для формы
-export const Form = ({children, ...props}) => {
+export const MyForm = ({children, ...props}) => {
     //получаем стили
     const styles = useStyles()
     return (
