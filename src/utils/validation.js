@@ -21,6 +21,9 @@ export const schemaStep2 = yup
             .string()
             .email('Email should have correct format')
             .required('Email is required'),
+        phoneNumber: yup
+        .string()
+        .matches(/^([^a-zA-zА-Яа-я]*)$/, 'Phone number should not contain letters')
         
     })
     .required();

@@ -62,6 +62,8 @@ export const Step2 = () => {
                     label='Phone number'
                     onChange={changePhone}
                     variant="standard"
+                    error={!!errors.phoneNumber}
+                    helperText={errors?.phoneNumber?.message}
                 />}
                 <MyButton
                     type='submit'

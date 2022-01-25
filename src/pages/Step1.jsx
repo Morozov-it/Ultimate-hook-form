@@ -53,7 +53,8 @@ export const Step1 = () => {
                 />
                 <MyButton
                     type='submit'
-                    variant="contained">Next</MyButton>
+                    variant="contained">Next
+                </MyButton>
             </MyForm>
         </MainContainer>
     )
