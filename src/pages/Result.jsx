@@ -1,22 +1,17 @@
 //основные
 import React from 'react';
-import { useForm } from 'react-hook-form';
 import { useNavigate } from "react-router-dom";
 //файлы библиотек
 import Typography from '@material-ui/core/Typography';
 import Article from '@mui/icons-material/Article';
 import ForwardToInboxIcon from '@mui/icons-material/ForwardToInbox';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableBody from '@material-ui/core/TableBody';
-import { Table, TableCell, TableRow } from '@material-ui/core';
-import { List, ListItem, ListItemText, ListItemIcon, Paper  } from '@material-ui/core';
-import { InsertDriveFile } from '@material-ui/icons';
+import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 //компоненты
 import { MainContainer } from '../components/MainContainer';
-import { MyForm } from '../components/MyForm'
 import { MyButton } from '../components/MyButton';
+import { MyTable } from '../components/MyTable';
+import { MyListFiles } from '../components/MyListFiles';
 //получение данных из контекста
 import { useData } from '../DataContext'
 
@@ -28,6 +23,9 @@ const useStyles = makeStyles({
     },
     table: {
         marginBottom: '1rem'
+    },
+    svg: {
+        marginRight: '5px'
     }
 });
 
@@ -36,22 +34,29 @@ export const Result = () => {
     const styles = useStyles();
     const { data, setData } = useData();
     let navigate = useNavigate();
-
+    const { files } = data;
     //фильтрация данных в объекте data по ключу file
     const entries = Object.entries(data).filter((entry) =>
-        entry[0] !== 'file' && entry[1] !== undefined && entry[0] !== 'havePhone'
+        entry[0] !== 'files' && entry[1] !== undefined && entry[0] !== 'havePhone'
     );
-    const { file } = data;
 
-    const { handleSubmit } = useForm({
-        defaultValues: {...data},
-    });
+    //функция отправки данных на сервер
+    const onSubmit = async () => {
+        //новый объект типа данных из формы
+        const formData = new FormData();
+        //если есть файлы добавляем их в поле files в итоговый объект formData
+        if (files) {
+            files.forEach((file) =>
+            formData.append('files', file, file.name))
+        }
+        //добавляем каждое поле в итоговый объект formData
+        entries.forEach((entry) =>
+            formData.append(entry[0], entry[1])
+        )
 
-    const onSubmit = async (formData) => {
-        
-        console.log('sent to server', formData);
-        //отправить на сервер (formData)
+        console.log('sent to server');
     };
+    //функция сброса данных в state
     const onReset = () => {
         setData({});
         navigate('/');
@@ -64,67 +69,34 @@ export const Result = () => {
                 className={styles.title}
                 variant="h5"
                 component="h2">
-                <Article  color='primary'/>
+                <Article className={styles.svg} color='primary'/>
                 <span> Form values</span>
             </Typography>
-            <TableContainer className={styles.table} component={Paper}>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>
-                            Field
-                            </TableCell>
-                            <TableCell align='right'>
-                            Value
-                            </TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {entries.map((entry) =>
-                            <TableRow key={entry[0]}>
-                                <TableCell>
-                                    {entry[0]}
-                                </TableCell>
-                                <TableCell align='right'>
-                                    {entry[1].toString()}
-                                </TableCell>
-                            </TableRow>
-                        )}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-            {file &&
+            <MyTable
+                className={styles.table}
+                component={Paper}
+                entries={entries}
+            />
+            {files &&
             <>
                 <Typography
                     className={styles.title}
                     variant="h5"
                     component="h2">
-                    <ForwardToInboxIcon />
+                    <ForwardToInboxIcon className={styles.svg} color='primary'/>
                     <span> Files</span>
                 </Typography>
-                <List>
-                    {file.map((i, index) =>
-                        <ListItem key={index}>
-                            <ListItemIcon>
-                                <InsertDriveFile />
-                            </ListItemIcon>
-                            <ListItemText primary={i.name} secondary={i.size}/>
-                        </ListItem>
-                    )}
-                    </List>
+                <MyListFiles files={files}/>
             </>}
-            <MyForm onSubmit={handleSubmit(onSubmit)}>
-                <MyButton
-                    type='submit'
-                    variant="contained">send to server
-                </MyButton>
-                <MyButton
-                    onClick={onReset}
-                    variant="outlined"
-                    type='reset'
-                >Clear and start over
-                </MyButton>
-            </MyForm>
+            <MyButton
+                onClick={onSubmit}
+                variant="contained">send to server
+            </MyButton>
+            <MyButton
+                onClick={onReset}
+                variant="outlined"
+            >Clear and start over
+            </MyButton>
         </MainContainer>
     )
 };

@@ -2,10 +2,11 @@
 import React from 'react';
 import { Controller } from 'react-hook-form';
 //импорт библиотек
-import { List, ListItem, ListItemText, ListItemIcon, Paper  } from '@material-ui/core';
-import { InsertDriveFile, CloudUpload } from '@material-ui/icons';
+import { Paper  } from '@material-ui/core';
+import { CloudUpload } from '@material-ui/icons';
 import Dropzone from 'react-dropzone';
 import { makeStyles } from '@material-ui/core/styles';
+import { MyListFiles } from './MyListFiles';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -47,16 +48,7 @@ export const FileInput = ({ control, name }) => {
                             </Paper>)
                         }
                     </Dropzone>
-                    <List>
-                        {value.map((i, index) =>
-                            <ListItem key={index}>
-                                <ListItemIcon>
-                                    <InsertDriveFile />
-                                </ListItemIcon>
-                                <ListItemText primary={i.name} secondary={i.size}/>
-                            </ListItem>
-                        )}
-                    </List>
+                    <MyListFiles files={value}/>
                 </>
             )}
         ></Controller>

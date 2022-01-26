@@ -21,7 +21,7 @@ export const Step3 = () => {
 
     const { control, handleSubmit } = useForm({
         mode: 'onBlur',
-        defaultValues: {file: data.file}
+        defaultValues: {files: data.files}
     });
 
     const onSubmit = async (formData) => {
@@ -37,7 +37,7 @@ export const Step3 = () => {
                 component="h2">Step 3
             </Typography>
             <MyForm onSubmit={handleSubmit(onSubmit)}>
-                <FileInput control={control} name='file'/>
+                <FileInput control={control} name='files'/>
                 <MyButton
                     type='submit'
                     variant="contained">Next
