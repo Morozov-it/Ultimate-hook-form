@@ -12,7 +12,7 @@ import { Step3 } from './pages/Step3';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Header />
       <Routes>
         <Route path="/" element={<Step1 />} />
