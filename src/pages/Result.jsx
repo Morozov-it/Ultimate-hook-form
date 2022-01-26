@@ -1,12 +1,14 @@
 //основные
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 //файлы библиотек
 import Typography from '@material-ui/core/Typography';
-import Article from '@mui/icons-material/Article';
-import ForwardToInboxIcon from '@mui/icons-material/ForwardToInbox';
+import Archive from '@material-ui/icons/Archive';
+import Forward from '@material-ui/icons/Forward';
 import { Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import Swal from 'sweetalert2';
+import Confetti from "react-confetti";
 //компоненты
 import { MainContainer } from '../components/MainContainer';
 import { MyButton } from '../components/MyButton';
@@ -31,6 +33,7 @@ const useStyles = makeStyles({
 
 
 export const Result = () => {
+    const [success, setSuccess] = useState(false);
     const styles = useStyles();
     const { data, setData } = useData();
     let navigate = useNavigate();
@@ -53,23 +56,33 @@ export const Result = () => {
         entries.forEach((entry) =>
             formData.append(entry[0], entry[1])
         )
-
-        console.log('sent to server');
+        //async/await позволяет обрабатывать код как при синхронном проходе
+        const response = await fetch('http://localhost:4000/', {
+            method: 'POST',
+            body: formData
+        })
+        if (response.status === 200) {
+            console.log('sent to server');
+            Swal.fire('Hey user!', 'You are the rockstar!', 'success');
+            setSuccess(true);
+        }
     };
+
     //функция сброса данных в state
     const onReset = () => {
         setData({});
         navigate('/');
-        console.log('data clear');
+        //console.log('data clear');
     };
 
+    if (success) { return <Confetti />}
     return (
         <MainContainer>
             <Typography
                 className={styles.title}
                 variant="h5"
                 component="h2">
-                <Article className={styles.svg} color='primary'/>
+                <Archive className={styles.svg} color='primary'/>
                 <span> Form values</span>
             </Typography>
             <MyTable
@@ -83,7 +96,7 @@ export const Result = () => {
                     className={styles.title}
                     variant="h5"
                     component="h2">
-                    <ForwardToInboxIcon className={styles.svg} color='primary'/>
+                    <Forward className={styles.svg} color='primary'/>
                     <span> Files</span>
                 </Typography>
                 <MyListFiles files={files}/>
@@ -94,8 +107,7 @@ export const Result = () => {
             </MyButton>
             <MyButton
                 onClick={onReset}
-                variant="outlined"
-            >Clear and start over
+                variant="outlined">Clear and start over
             </MyButton>
         </MainContainer>
     )

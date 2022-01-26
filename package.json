@@ -3,16 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@emotion/react": "^11.7.1",
-    "@emotion/styled": "^11.6.0",
     "@hookform/resolvers": "^2.8.8",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
-    "@mui/icons-material": "^5.3.1",
-    "@mui/material": "^5.3.1",
-    "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
+    "express-rate-limit": "^6.2.0",
     "libphonenumber-js": "^1.9.44",
     "material-ui": "^0.20.2",
     "react": "^17.0.2",
@@ -26,16 +20,24 @@
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.7-alpha.3",
+    "morgan": "^1.10.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start:server": "node ./server.js",
+    "dev": "concurrently --kill-others \"npm run start:server\" \"npm run start\""
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "react-app"
     ]
   },
   "browserslist": {

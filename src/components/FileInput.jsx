@@ -6,6 +6,7 @@ import { Paper  } from '@material-ui/core';
 import { CloudUpload } from '@material-ui/icons';
 import Dropzone from 'react-dropzone';
 import { makeStyles } from '@material-ui/core/styles';
+//импорт компонент
 import { MyListFiles } from './MyListFiles';
 
 const useStyles = makeStyles((theme) => ({

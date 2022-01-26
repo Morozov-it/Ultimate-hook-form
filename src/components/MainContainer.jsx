@@ -1,5 +1,7 @@
-import { Container } from '@material-ui/core';
+//основное
 import React from 'react';
+//импорт библиотек
+import { Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
