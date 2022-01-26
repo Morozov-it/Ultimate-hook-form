@@ -57,15 +57,15 @@ export const Result = () => {
             formData.append(entry[0], entry[1])
         )
         //async/await позволяет обрабатывать код как при синхронном проходе
-        const response = await fetch('http://localhost:4000/', {
-            method: 'POST',
-            body: formData
-        })
-        if (response.status === 200) {
+        // const response = await fetch('http://localhost:4000/', {
+        //     method: 'POST',
+        //     body: formData
+        // })
+        //if (response.status === 200) {
             console.log('sent to server');
             Swal.fire('Hey user!', 'You are the rockstar!', 'success');
             setSuccess(true);
-        }
+        //}
     };
 
     //функция сброса данных в state
