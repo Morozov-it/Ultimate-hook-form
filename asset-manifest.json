@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Ultimate-hook-form/static/css/main.87711d78.css",
-    "main.js": "/Ultimate-hook-form/static/js/main.5ac885ec.js",
+    "main.js": "/Ultimate-hook-form/static/js/main.0cd53f6f.js",
     "index.html": "/Ultimate-hook-form/index.html",
     "main.87711d78.css.map": "/Ultimate-hook-form/static/css/main.87711d78.css.map",
-    "main.5ac885ec.js.map": "/Ultimate-hook-form/static/js/main.5ac885ec.js.map"
+    "main.0cd53f6f.js.map": "/Ultimate-hook-form/static/js/main.0cd53f6f.js.map"
   },
   "entrypoints": [
     "static/css/main.87711d78.css",
-    "static/js/main.5ac885ec.js"
+    "static/js/main.0cd53f6f.js"
   ]
 }
